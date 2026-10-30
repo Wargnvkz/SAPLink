@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11806.211
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAPLink", "SAPLink\SAPLink.csproj", "{D0494DB1-7705-46A0-B029-3BAE4D7053E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExample", "Test\TestExample.csproj", "{110C4744-B764-4FC4-B1DA-DB0024379D21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0494DB1-7705-46A0-B029-3BAE4D7053E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0494DB1-7705-46A0-B029-3BAE4D7053E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0494DB1-7705-46A0-B029-3BAE4D7053E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0494DB1-7705-46A0-B029-3BAE4D7053E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110C4744-B764-4FC4-B1DA-DB0024379D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110C4744-B764-4FC4-B1DA-DB0024379D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110C4744-B764-4FC4-B1DA-DB0024379D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110C4744-B764-4FC4-B1DA-DB0024379D21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38EBCC19-D7CC-4493-BA96-6AE95E129491}
+	EndGlobalSection
+EndGlobal
