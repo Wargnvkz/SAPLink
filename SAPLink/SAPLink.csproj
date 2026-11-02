@@ -32,11 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="sapnco">
-      <HintPath>..\sapnco\sapnco.dll</HintPath>
+    <Reference Include="sapnco, Version=3.0.0.42, Culture=neutral, PublicKeyToken=50436dca5c7f7d23, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\sapnco.dll</HintPath>
     </Reference>
-    <Reference Include="sapnco_utils">
-      <HintPath>..\sapnco\sapnco_utils.dll</HintPath>
+    <Reference Include="sapnco_utils, Version=3.0.0.42, Culture=neutral, PublicKeyToken=50436dca5c7f7d23, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\sapnco_utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbapWhere.cs" />
     <Compile Include="SAPLink.cs" />
     <Compile Include="Classes.cs" />
     <Compile Include="ProcessDataTools.cs" />

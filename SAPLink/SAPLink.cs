@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -79,6 +80,22 @@ namespace SAPLink
             return Config.GetTable<T>(_destination, table, variant, strarr.ToArray());
         }
 
+        public List<T> GetTable<T>(string table, Expression<Func<T, bool>> where)
+        {
+            if (where == null) throw new ArgumentNullException(nameof(where));
+            var whereText = AbapWhere.Build(where);
+            var lines = SplitString(whereText, 60);
+            return Config.GetTable<T>(_destination, table, -1, lines.ToArray());
+        }
+
+        public List<T> GetTable<T>(string table, int variant, Expression<Func<T, bool>> where)
+        {
+            if (where == null) throw new ArgumentNullException(nameof(where));
+            var whereText = AbapWhere.Build(where);
+            var lines = SplitString(whereText, 60);
+            return Config.GetTable<T>(_destination, table, variant, lines.ToArray());
+        }
+
         public List<T> GetTableBitVariant<T>(string table, string options = "")
         {
             var strarr = SplitString(options, 60);
@@ -90,6 +107,13 @@ namespace SAPLink
             return Config.GetTableBitVariant<T>(_destination, table, variant, strarr.ToArray());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tablename"></param>
+        /// <param name="fields"></param>
+        /// <param name="where">array of where options. length of each row must not exceed 60 characters</param>
+        /// <returns></returns>
         public List<string> GetTable(string tablename, List<string> fields, List<string> where)
         {
             return Config.GetTable(_destination, tablename, fields, where);

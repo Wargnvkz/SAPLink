@@ -178,11 +178,6 @@ namespace SAPLink
         public List<T> GetTable<T>(string DestinationName, string table, int variant, params string[] options)
         {
             string delimiter = "\uffff";
-            var selectedLanguage = "ru-RU";
-            Thread.CurrentThread.CurrentCulture =
-                CultureInfo.CreateSpecificCulture(selectedLanguage);
-            Thread.CurrentThread.CurrentUICulture = new
-                CultureInfo(selectedLanguage);
 
             Type tt = typeof(T);
 
@@ -468,25 +463,8 @@ namespace SAPLink
                                 case SAPType.Corresponded:
                                     {
                                         var sdata = cols[i];
-                                        if (fields[n].FieldType != typeof(string)) sdata = sdata.Trim();
-                                        try
-                                        {
-                                            object v;
-                                            if (fields[n].FieldType.Equals(typeof(double)) || fields[n].FieldType.Equals(typeof(float)))
-                                            {
-                                                var s = sdata.Replace(",", "");
-                                                s = s.Replace('.', ',');
-                                                v = Convert.ChangeType(s, fields[n].FieldType);
-                                            }
-                                            else
-                                            {
-                                                v = Convert.ChangeType(cols[i], fields[n].FieldType);
-                                            }
-                                            fields[n].SetValue(t, v);
-                                        }
-                                        catch (Exception)
-                                        {
-                                        }
+                                        var val = ProcessDataTools.ConvertValue(sdata, fields[n].FieldType, fields[n].Name);
+                                        fields[n].SetValue(t, val);
                                         break;
                                     }
                                 case SAPType.DATE:
@@ -494,7 +472,7 @@ namespace SAPLink
                                         if (fields[n].FieldType == typeof(DateTime))
                                         {
                                             DateTime dt;
-                                            if (DateTime.TryParseExact(cols[i], "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.None, out dt))
+                                            if (DateTime.TryParseExact(cols[i], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dt))
                                             {
                                                 fields[n].SetValue(t, dt);
                                             }
@@ -512,7 +490,7 @@ namespace SAPLink
                                         if (fields[n].FieldType == typeof(TimeSpan))
                                         {
                                             TimeSpan tm;
-                                            if (TimeSpan.TryParseExact(cols[i], "hhmmss", System.Globalization.CultureInfo.CurrentCulture, out tm))
+                                            if (TimeSpan.TryParseExact(cols[i], "hhmmss", System.Globalization.CultureInfo.InvariantCulture, out tm))
                                             {
                                                 fields[n].SetValue(t, tm);
                                             }

@@ -22,7 +22,7 @@ namespace SAPLink.Classes
     {
         public string FieldName;
         public int[] Variants = new int[0];
-        public SAPType SAPType;
+        public SAPType SAPType = SAPType.Corresponded;
         //public int SAPLength;
 
         /// <summary>

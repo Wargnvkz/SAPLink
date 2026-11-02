@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -122,6 +123,27 @@ namespace SAPLink.Classes
                 && type.IsGenericType && type.Name.Contains("AnonymousType")
                 && (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
                 && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
+        }
+        public static object ConvertValue(string raw, Type type, string fieldName)
+        {
+            var target = Nullable.GetUnderlyingType(type) ?? type;
+            if (target == typeof(string)) return raw;
+
+            var s = raw.Trim();
+            if (s.Length == 0)                                   // пустое поле SAP
+                return type.IsValueType && target == type ? Activator.CreateInstance(type) : null;
+
+            try
+            {
+                if (target == typeof(bool)) return s == "X";     // флаги ABAP
+                if (s.EndsWith("-")) s = "-" + s.Substring(0, s.Length - 1); // "5.000-" -> "-5.000"
+                s = s.Replace(",", "");                          // разделитель тысяч
+                return Convert.ChangeType(s, target, CultureInfo.InvariantCulture);
+            }
+            catch (Exception e)
+            {
+                throw new FormatException($"Cannot convert '{raw}' to {type.Name} for field {fieldName}", e);
+            }
         }
     }
 }
