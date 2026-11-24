@@ -19,7 +19,7 @@ using System.Web;
 namespace SAPLink
 {
     /// <summary>
-    /// Summary description for AppData
+    /// Summary description for SAPLink
     /// 
     /// First operations with SAP can randomly throw System.NullReferenceException by unknown reason. It's a bug in SAP .NET Connector. It's a known issue. It doesn't affect the functionality of the application. Just ignore it.
     /// </summary>
